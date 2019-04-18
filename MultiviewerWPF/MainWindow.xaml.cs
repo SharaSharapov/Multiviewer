@@ -40,6 +40,10 @@ namespace MultiviewerWPF
             item.Header = "Close App";
             item.Click += Click;
             TB.ContextMenu.Items.Add(item);
+            item = new MenuItem();
+            item.Header = "stream info";
+            item.Click += StreamInfo;
+            TB.ContextMenu.Items.Add(item);
 
             int baseX = 384;
             int baseY = 250;
@@ -74,15 +78,17 @@ namespace MultiviewerWPF
                         Label zz = MainGrid.Children.OfType<Label>().FirstOrDefault(label => label.Name.Equals("ChName" + number.ToString()));
                         zz.Content = channel.name;
                         ChannelList.Add(channel);
-                    channel.Start();
+                        channel.Start();
                     }
                 }
         
         }
 
-        private void Item_Click(object sender, RoutedEventArgs e)
+        private void StreamInfo(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            Probe probe = new Probe(ChannelList[0].link);
+            probe.FFmpegPath = ffmpegDirectory;
+            probe.StartTest();
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)

@@ -12,7 +12,7 @@ namespace MultiviewerWPF
     {
         public int number;
         public string name;
-        private string link;
+        public string link;
         public int x;
         public int y;
         private bool widescreen;
